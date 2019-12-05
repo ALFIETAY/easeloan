@@ -49,7 +49,7 @@ asset CreditReport identified by applicantId {
   o String riskGrade optional
   o Integer creditScore optional
   o String riskPercentage optional
-  --> creditAssessor creditAssessor
+  --> CreditAssessor creditAssessor
 }
 
 // Asset class for Valuation Report
@@ -58,7 +58,7 @@ asset ValuationReport identified by applicantId {
   o DocumentStatus status
   o Integer estimatedValue optional
   o Integer marketValue optional
-  --> valuationAssessor valuationAssessor
+  --> ValuationAssessor valuationAssessor
 }
 
 // Asset class for TitleRegistryReport
@@ -69,7 +69,7 @@ asset TitleRegistryReport identified by applicantId {
   o String leaseDuration optional
   o String leaseExpiry optional
   o String propertyExist optional
-  --> landAuthority landAuthority
+  --> LandAuthority landAuthority
 }
 
 asset LoanContract identified by applicantId {
@@ -85,35 +85,31 @@ asset Application identified by applicationId {
   o PersonalDocuments personalDocuments
   o IncomeSlips incomeSlips
   o FinancialStatements financialStatements
-  --> Applicant applicant
 }
 
-participant Applicant identified by applicantId {
-  o String applicantId
-  o String firstName
-  o String lastName
-  --> Applicant applicant
+/**
+ * An abstract participant type in this business network
+ */
+abstract participant Business identified by staffId {
+  o String staffId
+  o String name
+  o String role
 }
 
-participant creditAssessor identified by creditAssessorId {
-  o String creditAssessorId
-  o String firstName
-  o String lastName
-  --> creditAssessor creditAssessor
+// A participant that handles credit reports
+participant CreditAssessor extends Business {
 }
 
-participant valuationAssessor identified by valuationAssessorId {
-  o String valuationAssessorId
-  o String firstName
-  o String lastName
-  --> valuationAssessor valuationAssessor
+// A participant that handles valuation reports
+participant ValuationAssessor extends Business {
 }
 
-participant landAuthority identified by landAuthorityId {
-  o String landAuthorityId
-  o String firstName
-  o String lastName
-  --> landAuthority landAuthority
+// A participant that handles title registry reports
+participant LandAuthority extends Business {
+}
+
+// To Initialize the demo
+transaction SetupDemo {
 }
 
 // Transaction for Application of Mortgage Loan
@@ -123,31 +119,12 @@ transaction CreateLoanApplication{
   o PersonalDocuments personalDocuments
   o IncomeSlips incomeSlips
   o FinancialStatements financialStatements
-  --> Applicant applicant
-}
-
-// Event for Creating Application
-event CreateApplicationEvent {
-  o String applicationId
-  o String applicantName
-  o PersonalDocuments personalDocuments
-  o IncomeSlips incomeSlips
-  o FinancialStatements financialStatements
-  --> Applicant applicant
 }
 
 // Transaction to create Asset for Credit Report Company
 transaction CreateCreditReport {
   o String applicantId
   o DocumentStatus status
-  --> creditAssessor creditAssessor
-}
-
-// Event for Creating Credit Report
-event CreateCreditReportEvent {
-  o String applicantId
-  o DocumentStatus status
-  --> creditAssessor creditAssessor
 }
 
 // Transaction for Updating Credit Report to PROCESSING or COMPLETED
@@ -157,31 +134,12 @@ transaction UpdateCreditReport {
   o String riskGrade optional
   o Integer creditScore optional
   o String riskPercentage optional
-  --> creditAssessor creditAssessor
-}
-
-// Event for Updating Credit Report
-event UpdateCreditReportEvent {
-  o String applicantId
-  o DocumentStatus status
-  o String riskGrade optional
-  o Integer creditScore optional
-  o String riskPercentage optional
-  --> creditAssessor creditAssessor
 }
 
 // Transaction to create Asset for Valuation Company
 transaction CreateValuationReport {
   o String applicantId
   o DocumentStatus status
-  --> valuationAssessor valuationAssessor
-}
-
-// Event for Creating Valuation Report
-event CreateValuationReportEvent {
-  o String applicantId
-  o DocumentStatus status
-  --> valuationAssessor valuationAssessor
 }
 
 // Transaction for Updating Valuation Report to PROCESSING or COMPLETED
@@ -190,16 +148,6 @@ transaction UpdateValuationReport {
   o DocumentStatus status
   o Integer estimatedValue optional
   o Integer marketValue optional
-  --> valuationAssessor valuationAssessor
-}
-
-// Event for Updating Valuation Report
-event UpdateValuationReportEvent {
-  o String applicantId
-  o DocumentStatus status
-  o Integer estimatedValue optional
-  o Integer marketValue optional
-  --> valuationAssessor valuationAssessor
 }
 
 // Transaction for Title Registry Company
@@ -210,18 +158,6 @@ transaction CreateTitleRegistry {
   o String leaseDuration optional
   o String leaseExpiry optional
   o String propertyExist optional
-  --> landAuthority landAuthority
-}
-
-// Event for Creating Title Registry Report
-event CreateTitleRegistryEvent {
-  o String applicantId
-  o DocumentStatus status
-  o String propertyAddress optional
-  o String leaseDuration optional
-  o String leaseExpiry optional
-  o String propertyExist optional
-  --> landAuthority landAuthority
 }
 
 // Transaction for Updating Title Registry Report to PROCESSING or COMPLETED
@@ -232,16 +168,4 @@ transaction UpdateTitleRegistry {
   o String leaseDuration optional
   o String leaseExpiry optional
   o String propertyExist optional
-  --> landAuthority landAuthority
-}
-
-// Event for Updating Title Registry Report
-event UpdateTitleRegistryEvent {
-  o String applicantId
-  o DocumentStatus status
-  o String propertyAddress optional
-  o String leaseDuration optional
-  o String leaseExpiry optional
-  o String propertyExist optional
-  --> landAuthority landAuthority
 }

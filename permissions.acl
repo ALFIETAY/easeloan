@@ -17,7 +17,7 @@
  */
 rule EverybodyCanReadEverything {
     description: "Allow all participants read access to all resources"
-    participant: "mortgage.Applicant"
+    participant: "mortgage.*"
     operation: READ
     resource: "mortgage.*"
     action: ALLOW
@@ -25,9 +25,9 @@ rule EverybodyCanReadEverything {
 
 rule EverybodyCanSubmitTransactions {
     description: "Allow all participants to submit transactions"
-    participant: "mortgage.Applicant"
+    participant: "mortgage.*"
     operation: CREATE
-    resource: "mortgage.CreateLoanApplication"
+    resource: "mortgage.*"
     action: ALLOW
 }
 
@@ -62,23 +62,4 @@ rule NetworkAdminSystem {
     operation: ALL
     resource: "org.hyperledger.composer.system.**"
     action: ALLOW
-}
-
-/**
- * Access control rules for tutorial-network
- */
-rule Default {
-    description: "Allow all participants access to all resources"
-    participant: "ANY"
-    operation: ALL
-    resource: "mortgage.*"
-    action: ALLOW
-}
-
-rule SystemACL {
-  description:  "System ACL to permit all access"
-  participant: "ANY"
-  operation: ALL
-  resource: "org.hyperledger.composer.system.**"
-  action: ALLOW
 }
