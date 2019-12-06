@@ -20,7 +20,7 @@ namespace mortgage
 
 // ENUMS
 enum DocumentStatus {
-  o AWAITING_DOCUMENT
+  o AWAITING_APPLICATION
   o PROCESSING
   o COMPLETED
   o APPROVED
@@ -168,4 +168,12 @@ transaction UpdateTitleRegistry {
   o String leaseDuration optional
   o String leaseExpiry optional
   o String propertyExist optional
+}
+
+transaction LoanContractReview {
+  o String applicantId
+  o Integer loanTenure
+  o Integer loanToValue
+  o String mortgageServicingRatio
+  o String totalDebtServicingRatio
 }
