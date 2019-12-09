@@ -28,15 +28,7 @@ enum DocumentStatus {
   o RECEIVED
 }
 
-enum PersonalDocuments {
-  o RECEIVED
-  o REJECTED
-}
-enum IncomeSlips {
-  o RECEIVED
-  o REJECTED
-}
-enum FinancialStatements {
+enum AppliationDocuments {
   o RECEIVED
   o REJECTED
 }
@@ -74,17 +66,27 @@ asset TitleRegistryReport identified by applicantId {
 
 asset LoanContract identified by applicantId {
   o String applicantId
-  o DocumentStatus status
-
+  o String applicantName
+  o Integer loanTenure
+  o Integer loanAmount
+  o Integer propertyAmount
+  o Integer monthlyMortgagePayment
+  o Integer totalDebtServicingRatio
 }
 
 // Asset class for Application of Mortgage Loan
 asset Application identified by applicationId {
   o String applicationId
   o String applicantName
-  o PersonalDocuments personalDocuments
-  o IncomeSlips incomeSlips
-  o FinancialStatements financialStatements
+  o Integer applicantAge
+  o AppliationDocuments personalDocuments
+  o AppliationDocuments incomeSlips
+  o AppliationDocuments financialStatements
+  o Integer loanTenure
+  o Integer loanAmount
+  o Integer propertyAmount
+  o Integer monthlyIncome
+  o Integer monthlyDebtPayment
 }
 
 /**
@@ -116,9 +118,15 @@ transaction SetupDemo {
 transaction CreateLoanApplication{
   o String applicationId
   o String applicantName
-  o PersonalDocuments personalDocuments
-  o IncomeSlips incomeSlips
-  o FinancialStatements financialStatements
+  o Integer applicantAge
+  o AppliationDocuments personalDocuments
+  o AppliationDocuments incomeSlips
+  o AppliationDocuments financialStatements
+  o Integer loanTenure
+  o Integer loanAmount
+  o Integer propertyAmount
+  o Integer monthlyIncome
+  o Integer monthlyDebtPayment
 }
 
 // Transaction to create Asset for Credit Report Company
@@ -170,10 +178,6 @@ transaction UpdateTitleRegistry {
   o String propertyExist optional
 }
 
-transaction LoanContractReview {
-  o String applicantId
-  o Integer loanTenure
-  o Integer loanToValue
-  o String mortgageServicingRatio
-  o String totalDebtServicingRatio
+transaction ReviewLoanContract {
+  --> Application application
 }

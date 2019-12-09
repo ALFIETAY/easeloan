@@ -3,7 +3,7 @@
     "composer": "^0.20.9"
   },
   "name": "mortgage-network",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "mortgage loan network",
   "scripts": {
     "prepublish": "mkdirp ./dist && composer archive create --sourceType dir --sourceName . -a ./dist/mortgage-network.bna",
