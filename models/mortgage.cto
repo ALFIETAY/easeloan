@@ -33,6 +33,11 @@ enum AppliationDocuments {
   o REJECTED
 }
 
+enum LoanContractStatus {
+  o WAITING_APPLICANT_ACCEPTANCE
+  o COMPLETED
+}
+
 //https://www.creditbureau.com.sg/pdf/Enhanced-Consumer-Credit-Report-2018.pdf
 // Asset class for Credit Report
 asset CreditReport identified by applicantId {
@@ -68,10 +73,11 @@ asset LoanContract identified by applicantId {
   o String applicantId
   o String applicantName
   o Integer loanTenure
-  o Integer loanAmount
+  o Integer maxLoanAmount
   o Integer propertyAmount
   o Integer monthlyMortgagePayment
   o Integer totalDebtServicingRatio
+  o LoanContractStatus loanContractStatus
 }
 
 // Asset class for Application of Mortgage Loan
@@ -180,4 +186,8 @@ transaction UpdateTitleRegistry {
 
 transaction ReviewLoanContract {
   --> Application application
+}
+
+transaction LoanConfirmation {
+  --> LoanContract loanContract
 }
