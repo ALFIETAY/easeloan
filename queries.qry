@@ -1,0 +1,8 @@
+/** Sample queries for Mortgage business network
+*/
+
+query selectAllTransactions {
+  description: "Select all transactions"
+  statement:
+      SELECT org.hyperledger.composer.system.HistorianRecord
+}

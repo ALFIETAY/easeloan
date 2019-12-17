@@ -135,8 +135,27 @@ transaction CreateLoanApplication{
   o Integer monthlyDebtPayment
 }
 
+event CreateLoanApplicationEvent {
+o String applicationId
+  o String applicantName
+  o Integer applicantAge
+  o AppliationDocuments personalDocuments
+  o AppliationDocuments incomeSlips
+  o AppliationDocuments financialStatements
+  o Integer loanTenure
+  o Integer loanAmount
+  o Integer propertyAmount
+  o Integer monthlyIncome
+  o Integer monthlyDebtPayment
+}
+
 // Transaction to create Asset for Credit Report Company
 transaction CreateCreditReport {
+  o String applicantId
+  o DocumentStatus status
+}
+
+event CreateCreditEvent {
   o String applicantId
   o DocumentStatus status
 }
@@ -150,8 +169,21 @@ transaction UpdateCreditReport {
   o String riskPercentage optional
 }
 
+event UpdateCreditReportEvent {
+  o String applicantId
+  o DocumentStatus status
+  o String riskGrade optional
+  o Integer creditScore optional
+  o String riskPercentage optional
+}
+
 // Transaction to create Asset for Valuation Company
 transaction CreateValuationReport {
+  o String applicantId
+  o DocumentStatus status
+}
+
+event CreateValuationEvent {
   o String applicantId
   o DocumentStatus status
 }
@@ -164,14 +196,22 @@ transaction UpdateValuationReport {
   o Integer marketValue optional
 }
 
+event UpdateValuationReportEvent {
+  o String applicantId
+  o DocumentStatus status
+  o Integer estimatedValue optional
+  o Integer marketValue optional
+}
+
 // Transaction for Title Registry Company
 transaction CreateTitleRegistry {
   o String applicantId
   o DocumentStatus status
-  o String propertyAddress optional
-  o String leaseDuration optional
-  o String leaseExpiry optional
-  o String propertyExist optional
+}
+
+event CreateTitleEvent {
+  o String applicantId
+  o DocumentStatus status
 }
 
 // Transaction for Updating Title Registry Report to PROCESSING or COMPLETED
@@ -184,10 +224,33 @@ transaction UpdateTitleRegistry {
   o String propertyExist optional
 }
 
+event UpdateTitleRegistryEvent {
+  o String applicantId
+  o DocumentStatus status
+  o String propertyAddress optional
+  o String leaseDuration optional
+  o String leaseExpiry optional
+  o String propertyExist optional
+}
+
 transaction ReviewLoanContract {
   --> Application application
 }
 
+event ReviewLoanContractEvent {
+  o String applicantId
+  o String applicantName
+  o Integer loanTenure
+  o Integer maxLoanAmount
+  o Integer propertyAmount
+  o Integer monthlyMortgagePayment
+  o Integer totalDebtServicingRatio
+}
+
 transaction LoanConfirmation {
   --> LoanContract loanContract
+}
+
+event LoanCofirmationEvent {
+  o LoanContractStatus loanContractStatus
 }
