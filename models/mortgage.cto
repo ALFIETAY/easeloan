@@ -20,12 +20,9 @@ namespace mortgage
 
 // ENUMS
 enum DocumentStatus {
-  o AWAITING_APPLICATION
   o PROCESSING
   o COMPLETED
-  o APPROVED
   o REJECTED
-  o RECEIVED
 }
 
 enum AppliationDocuments {
