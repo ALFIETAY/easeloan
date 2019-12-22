@@ -75,6 +75,7 @@ asset LoanContract identified by applicantId {
   o Integer monthlyMortgagePayment
   o Integer totalDebtServicingRatio
   o LoanContractStatus loanContractStatus
+  --> Status status
 }
 
 // Asset class for Application of Mortgage Loan
@@ -90,6 +91,11 @@ asset Application identified by applicationId {
   o Integer propertyAmount
   o Integer monthlyIncome
   o Integer monthlyDebtPayment
+}
+
+asset Status identified by applicationId {
+  o String applicationId
+  o String status
 }
 
 /**
