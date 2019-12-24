@@ -83,9 +83,11 @@ asset Application identified by applicationId {
   o String applicationId
   o String applicantName
   o Integer applicantAge
-  o AppliationDocuments personalDocuments
-  o AppliationDocuments incomeSlips
-  o AppliationDocuments financialStatements
+  o AppliationDocuments nric
+  o AppliationDocuments creditStatements
+  o AppliationDocuments propertyOfferLetter
+  o AppliationDocuments payslips
+  o AppliationDocuments cpfContribution
   o Integer loanTenure
   o Integer loanAmount
   o Integer propertyAmount
@@ -95,6 +97,7 @@ asset Application identified by applicationId {
 
 asset Status identified by applicationId {
   o String applicationId
+  o String currentOrganisation
   o String status
 }
 
@@ -128,9 +131,11 @@ transaction CreateLoanApplication{
   o String applicationId
   o String applicantName
   o Integer applicantAge
-  o AppliationDocuments personalDocuments
-  o AppliationDocuments incomeSlips
-  o AppliationDocuments financialStatements
+  o AppliationDocuments nric
+  o AppliationDocuments creditStatements
+  o AppliationDocuments propertyOfferLetter
+  o AppliationDocuments payslips
+  o AppliationDocuments cpfContribution
   o Integer loanTenure
   o Integer loanAmount
   o Integer propertyAmount
@@ -142,9 +147,11 @@ event CreateLoanApplicationEvent {
 o String applicationId
   o String applicantName
   o Integer applicantAge
-  o AppliationDocuments personalDocuments
-  o AppliationDocuments incomeSlips
-  o AppliationDocuments financialStatements
+  o AppliationDocuments nric
+  o AppliationDocuments creditStatements
+  o AppliationDocuments propertyOfferLetter
+  o AppliationDocuments payslips
+  o AppliationDocuments cpfContribution
   o Integer loanTenure
   o Integer loanAmount
   o Integer propertyAmount
