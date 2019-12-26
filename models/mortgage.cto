@@ -99,6 +99,7 @@ asset Status identified by applicationId {
   o String applicationId
   o String currentOrganisation
   o String status
+  o String date
 }
 
 /**
