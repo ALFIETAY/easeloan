@@ -38,8 +38,8 @@ enum LoanContractStatus {
 
 //https://www.creditbureau.com.sg/pdf/Enhanced-Consumer-Credit-Report-2018.pdf
 // Asset class for Credit Report
-asset CreditReport identified by applicantId {
-  o String applicantId
+asset CreditReport identified by applicationId {
+  o String applicationId
   o DocumentStatus status
   o String riskGrade optional
   o Integer creditScore optional
@@ -48,8 +48,8 @@ asset CreditReport identified by applicantId {
 }
 
 // Asset class for Valuation Report
-asset ValuationReport identified by applicantId {
-  o String applicantId
+asset ValuationReport identified by applicationId {
+  o String applicationId
   o DocumentStatus status
   o Integer estimatedValue optional
   o Integer marketValue optional
@@ -57,8 +57,8 @@ asset ValuationReport identified by applicantId {
 }
 
 // Asset class for TitleRegistryReport
-asset TitleRegistryReport identified by applicantId {
-  o String applicantId
+asset TitleRegistryReport identified by applicationId {
+  o String applicationId
   o DocumentStatus status
   o String propertyAddress optional
   o String leaseDuration optional
@@ -67,8 +67,8 @@ asset TitleRegistryReport identified by applicantId {
   --> LandAuthority landAuthority
 }
 
-asset LoanContract identified by applicantId {
-  o String applicantId
+asset LoanContract identified by applicationId {
+  o String applicationId
   o String applicantName
   o Integer loanTenure
   o Integer maxLoanAmount
@@ -164,19 +164,19 @@ event CreateLoanApplicationEvent {
 
 // Transaction to create Asset for Credit Report Company
 transaction CreateCreditReport {
-  o String applicantId
+  o String applicationId
   o DocumentStatus status
 }
 
 event CreateCreditEvent {
-  o String applicantId
+  o String applicationId
   o String eventName
   o DocumentStatus status
 }
 
 // Transaction for Updating Credit Report to PROCESSING or COMPLETED
 transaction UpdateCreditReport {
-  o String applicantId
+  o String applicationId
   o DocumentStatus status
   o String riskGrade optional
   o Integer creditScore optional
@@ -184,7 +184,7 @@ transaction UpdateCreditReport {
 }
 
 event UpdateCreditReportEvent {
-  o String applicantId
+  o String applicationId
   o String eventName
   o DocumentStatus status
   o String riskGrade optional
@@ -194,26 +194,26 @@ event UpdateCreditReportEvent {
 
 // Transaction to create Asset for Valuation Company
 transaction CreateValuationReport {
-  o String applicantId
+  o String applicationId
   o DocumentStatus status
 }
 
 event CreateValuationEvent {
-  o String applicantId
+  o String applicationId
   o String eventName
   o DocumentStatus status
 }
 
 // Transaction for Updating Valuation Report to PROCESSING or COMPLETED
 transaction UpdateValuationReport {
-  o String applicantId
+  o String applicationId
   o DocumentStatus status
   o Integer estimatedValue optional
   o Integer marketValue optional
 }
 
 event UpdateValuationReportEvent {
-  o String applicantId
+  o String applicationId
   o String eventName
   o DocumentStatus status
   o Integer estimatedValue optional
@@ -222,19 +222,19 @@ event UpdateValuationReportEvent {
 
 // Transaction for Title Registry Company
 transaction CreateTitleRegistry {
-  o String applicantId
+  o String applicationId
   o DocumentStatus status
 }
 
 event CreateTitleEvent {
-  o String applicantId
+  o String applicationId
   o String eventName
   o DocumentStatus status
 }
 
 // Transaction for Updating Title Registry Report to PROCESSING or COMPLETED
 transaction UpdateTitleRegistry {
-  o String applicantId
+  o String applicationId
   o DocumentStatus status
   o String propertyAddress optional
   o String leaseDuration optional
@@ -243,7 +243,7 @@ transaction UpdateTitleRegistry {
 }
 
 event UpdateTitleRegistryEvent {
-  o String applicantId
+  o String applicationId
   o String eventName
   o DocumentStatus status
   o String propertyAddress optional
@@ -257,7 +257,7 @@ transaction ReviewLoanContract {
 }
 
 event ReviewLoanContractEvent {
-  o String applicantId
+  o String applicationId
   o String eventName
   o String applicantName
   o Integer loanTenure
@@ -272,7 +272,7 @@ transaction LoanConfirmation {
   o LoanContractStatus loanContractStatus 
 }
 
-event LoanCofirmationEvent {
+event LoanConfirmationEvent {
   o String eventName
   o LoanContractStatus loanContractStatus
 }
