@@ -33,6 +33,7 @@ enum AppliationDocuments {
 enum LoanContractStatus {
   o WAITING_APPLICANT_ACCEPTANCE
   o COMPLETED
+  o REJECTED
 }
 
 //https://www.creditbureau.com.sg/pdf/Enhanced-Consumer-Credit-Report-2018.pdf
@@ -145,7 +146,8 @@ transaction CreateLoanApplication{
 }
 
 event CreateLoanApplicationEvent {
-o String applicationId
+  o String applicationId
+  o String eventName
   o String applicantName
   o Integer applicantAge
   o AppliationDocuments nric
@@ -168,6 +170,7 @@ transaction CreateCreditReport {
 
 event CreateCreditEvent {
   o String applicantId
+  o String eventName
   o DocumentStatus status
 }
 
@@ -182,6 +185,7 @@ transaction UpdateCreditReport {
 
 event UpdateCreditReportEvent {
   o String applicantId
+  o String eventName
   o DocumentStatus status
   o String riskGrade optional
   o Integer creditScore optional
@@ -196,6 +200,7 @@ transaction CreateValuationReport {
 
 event CreateValuationEvent {
   o String applicantId
+  o String eventName
   o DocumentStatus status
 }
 
@@ -209,6 +214,7 @@ transaction UpdateValuationReport {
 
 event UpdateValuationReportEvent {
   o String applicantId
+  o String eventName
   o DocumentStatus status
   o Integer estimatedValue optional
   o Integer marketValue optional
@@ -222,6 +228,7 @@ transaction CreateTitleRegistry {
 
 event CreateTitleEvent {
   o String applicantId
+  o String eventName
   o DocumentStatus status
 }
 
@@ -237,6 +244,7 @@ transaction UpdateTitleRegistry {
 
 event UpdateTitleRegistryEvent {
   o String applicantId
+  o String eventName
   o DocumentStatus status
   o String propertyAddress optional
   o String leaseDuration optional
@@ -250,6 +258,7 @@ transaction ReviewLoanContract {
 
 event ReviewLoanContractEvent {
   o String applicantId
+  o String eventName
   o String applicantName
   o Integer loanTenure
   o Integer maxLoanAmount
@@ -260,8 +269,10 @@ event ReviewLoanContractEvent {
 
 transaction LoanConfirmation {
   --> LoanContract loanContract
+  o LoanContractStatus loanContractStatus 
 }
 
 event LoanCofirmationEvent {
+  o String eventName
   o LoanContractStatus loanContractStatus
 }
