@@ -166,6 +166,7 @@
   event CreateCreditEvent {
     o String applicationId
     o String eventName
+    o String eventStatus
     o String currentOrganisation
     o String date
     o DocumentStatus status
@@ -200,6 +201,7 @@
   event CreateValuationEvent {
     o String applicationId
     o String eventName
+    o String eventStatus
     o String currentOrganisation
     o String date
     o DocumentStatus status
@@ -232,6 +234,7 @@
   event CreateTitleEvent {
     o String applicationId
     o String eventName
+    o String eventStatus
     o String currentOrganisation
     o String date
     o DocumentStatus status
