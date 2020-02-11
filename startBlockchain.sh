@@ -23,19 +23,24 @@ else
 fi
 
 # Deploy new BNA
-cd $composerPath
-curVersion=$(cat $versionPath)
-newVersion=$((curVersion+1))
-echo $newVersion > $versionPath
-sed -i 's/"version": "0.0.'"$curVersion"'/"version": "0.0.'"$newVersion"'/g' package.json
+# cd $composerPath
+# curVersion=$(cat $versionPath)
+# newVersion=$((curVersion+1))
+# echo $newVersion > $versionPath
+# sed -i 's/"version": "0.0.'"$curVersion"'/"version": "0.0.'"$newVersion"'/g' package.json
+
+newVersion=1
 composer archive create -t dir -n .
 if [ $? -ne 0 ]; then
     echo "Failed to create composer archive"
     exit 1
 fi
-composer network install --card $adminCard --archiveFile mortgage-network@0.0.$newVersion.bna
+composer network install --card $adminCard --archiveFile mortgage-network@0.1.$newVersion.bna
+# delete previous admin card
+composer card delete --card admin@mortgage-network
+
 # start new BNA
-composer network start --networkName mortgage-network --networkVersion 0.0.$newVersion --networkAdmin admin --networkAdminEnrollSecret adminpw --card PeerAdmin@hlfv1 --file networkadmin.card
+composer network start --networkName mortgage-network --networkVersion 0.1.$newVersion --networkAdmin admin --networkAdminEnrollSecret adminpw --card PeerAdmin@hlfv1 --file networkadmin.card
 
 composer card import --file networkadmin.card
 
