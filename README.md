@@ -34,20 +34,6 @@ composer archive create -t dir -n .
 ./teardownFabric.sh
 ./teardownAllDocker.sh
 
-*Setup Authentication Environtment for Github*
-export COMPOSER_PROVIDERS='{
-  "github": {
-    "provider": "github",
-    "module": "passport-github",
-    "clientID": "26fc4af02845fa305d62",
-    "clientSecret": "699f3e40dafcfd008a19df7636590e526ec7ffbb",
-    "authPath": "/auth/github",
-    "callbackURL": "/auth/github/callback",
-    "successRedirect": "/",
-    "failureRedirect": "/"
-  }
-}'
-
 *Running Google Authentication*
 https://hyperledger.github.io/composer/latest/tutorials/google_oauth2_rest
 
